@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todoey/constants.dart';
+import 'package:todoey/components/tasks_list.dart';
+import 'package:todoey/screens/AddTaskScreen.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
@@ -53,26 +53,24 @@ class TasksScreen extends StatelessWidget {
                   topRight: Radius.circular(20.0),
                 ),
               ),
-              child: ListView.builder(itemBuilder: (context, index) {
-                return CheckboxListTile(
-                  value: true,
-                  title: const Text("Todo 1"),
-                  onChanged: (bool? value) {
-
-                  },
-                  controlAffinity: ListTileControlAffinity.platform,
-                );
-              },
-              itemCount: todos.length,),
+              child: const TaskList(),
             ),
           )
         ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightBlueAccent,
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            backgroundColor: Colors.red,
+              context: context,
+              builder: (context) =>  const AddTaskScreen()
+          );
+        },
         child: const Icon(Icons.add),
       ),
     );
   }
 }
+
+
