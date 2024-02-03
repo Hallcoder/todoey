@@ -1,15 +1,12 @@
 import "package:flutter/material.dart";
+import "package:todoey/models/task.dart";
 
-class AddTaskScreen extends StatefulWidget {
-  const AddTaskScreen({Key? key}) : super(key: key);
+class AddTaskScreen extends StatelessWidget {
+  AddTaskScreen({Key? key, required this.addTask, required this.isLoading}) : super(key: key);
 
-  @override
-  State<AddTaskScreen> createState() => _AddTaskScreenState();
-}
-
-class _AddTaskScreenState extends State<AddTaskScreen> {
   final TextEditingController _controller = TextEditingController();
-
+  final Function(Task t) addTask;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,6 +14,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         color: Color(0xff757575),
       ),
       child: Container(
+        padding: const EdgeInsets.all(20.0),
         decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
@@ -24,7 +22,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               topLeft: Radius.circular(20.0),
             )),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
@@ -34,25 +31,26 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 fontSize: 40.0,
               ),
             ),
-            SizedBox(
-              width:250.0,
-              child: TextFormField(
-                controller: _controller,
-              ),
+            TextFormField(
+              controller: _controller,
             ),
             const SizedBox(
               height: 15.0,
             ),
             GestureDetector(
+              onTap: (){
+                addTask(Task(name:_controller.text));
+                Navigator.pop(context);
+              },
               child:  Container(
                 decoration: const BoxDecoration(
                   color: Colors.blueAccent
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                child:  Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: Text(
-                    "ADD",
-                    style: TextStyle(
+                    !isLoading ? "ADD":"Loading...",
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
                   ),

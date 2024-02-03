@@ -1,20 +1,21 @@
 import "package:flutter/material.dart";
 import "package:todoey/components/task_tile.dart";
+import "package:todoey/models/task.dart";
 
-import "../constants.dart";
 
 class TaskList extends StatelessWidget {
   const TaskList({
-    super.key,
+    super.key, required this.tasks,
   });
-
+  final List<Task> tasks;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return const TaskTile();
+        return TaskTile(
+            isChecked: tasks[index].isDone, taskTitle: tasks[index].name);
       },
-      itemCount: todos.length,
+      itemCount: tasks.length,
     );
   }
 }
