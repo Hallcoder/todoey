@@ -13,9 +13,7 @@ class TasksScreen extends StatefulWidget {
 class _TasksScreenState extends State<TasksScreen> {
   bool isLoading = false;
   List<Task> tasks = [
-    Task(name: "Buy milk"),
-    Task(name: "Buy eggs"),
-    Task(name: "Buy bread", isDone: true)
+
   ];
 
   void addTask(Task t) {
