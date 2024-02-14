@@ -12,9 +12,7 @@ class TasksScreen extends StatefulWidget {
 
 class _TasksScreenState extends State<TasksScreen> {
   bool isLoading = false;
-  List<Task> tasks = [
-
-  ];
+  List<Task> tasks = [];
 
   void addTask(Task t) {
     setState(() {
@@ -38,10 +36,10 @@ class _TasksScreenState extends State<TasksScreen> {
           Container(
             padding: const EdgeInsets.only(
                 top: 60.0, left: 30.0, right: 30.0, bottom: 30.0),
-            child: const Column(
+            child:  Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 30.0,
                   child: Icon(
@@ -50,10 +48,10 @@ class _TasksScreenState extends State<TasksScreen> {
                     color: Colors.lightBlueAccent,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15.0,
                 ),
-                Text(
+                const Text(
                   "Todoey Title",
                   style: TextStyle(
                       color: Colors.white,
@@ -61,8 +59,8 @@ class _TasksScreenState extends State<TasksScreen> {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "12 texts",
-                  style: TextStyle(color: Colors.white, fontSize: 18.0),
+                  "${tasks.length} texts",
+                  style: const TextStyle(color: Colors.white, fontSize: 18.0),
                 ),
               ],
             ),
