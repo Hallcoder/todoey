@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoey/components/tasks_list.dart';
+import 'package:todoey/main.dart';
 import 'package:todoey/models/task.dart';
 import 'package:todoey/screens/AddTaskScreen.dart';
 
@@ -11,23 +13,11 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  bool isLoading = false;
-  List<Task> tasks = [];
 
-  void addTask(Task t) {
-    setState(() {
-      isLoading = true;
-    });
-    List<Task> ts = tasks;
-    ts.add(t);
-    setState(() {
-      tasks = ts;
-      isLoading = false;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
+    List<Task> tasks = Provider.of<Data>(context).tasks;
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       body: Column(
@@ -85,7 +75,7 @@ class _TasksScreenState extends State<TasksScreen> {
           showModalBottomSheet(
             backgroundColor: Colors.red,
             context: context,
-            builder: (context) => AddTaskScreen(addTask: addTask, isLoading: isLoading,),
+            builder: (context) => AddTaskScreen(),
           );
         },
         child: const Icon(Icons.add),
